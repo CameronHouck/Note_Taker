@@ -26,6 +26,10 @@ a note taker to remind yourself of tasks for the future
 
 ![alt text](https://cdn.discordapp.com/attachments/854051850995499031/854543203902554132/unknown.png)
 ![alt text](https://cdn.discordapp.com/attachments/854051850995499031/854543157382217768/unknown.png)
+
+## DEPLOYED APP
+
+https://expressnotetaker2559.herokuapp.com/
  
 ## Installation
   
