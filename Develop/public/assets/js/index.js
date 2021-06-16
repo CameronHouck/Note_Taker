@@ -96,7 +96,12 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
   e.preventDefault();
-  activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  if (e.target.nodeName === 'LI') {
+    activeNote = JSON.parse(e.target.getAttribute('data-note')) || {};
+  }
+  if (e.target.nodeName === 'SPAN') {
+    activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note')) || {};
+  }
   renderActiveNote();
 };
 
@@ -106,8 +111,12 @@ const handleNewNoteView = (e) => {
   renderActiveNote();
 };
 
+const checkIfReadonly = () => {
+  return noteTitle.readOnly || noteText.readOnly;
+};
+
 const handleRenderSaveBtn = () => {
-  if (!noteTitle.value.trim() || !noteText.value.trim()) {
+  if (!noteTitle.value.trim() || !noteText.value.trim() || checkIfReadonly()) {
     hide(saveNoteBtn);
   } else {
     show(saveNoteBtn);
@@ -127,10 +136,10 @@ const renderNoteList = async (notes) => {
   const createLi = (text, delBtn = true) => {
     const liEl = document.createElement('li');
     liEl.classList.add('list-group-item');
+    liEl.addEventListener('click', handleNoteView);
 
     const spanEl = document.createElement('span');
     spanEl.innerText = text;
-    spanEl.addEventListener('click', handleNoteView);
 
     liEl.append(spanEl);
 
