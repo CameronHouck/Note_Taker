@@ -60,17 +60,18 @@ app.post("/api/notes", function (req, res) {
 app.delete("/api/notes/:id", (req, res) => {
   const ID = parseInt(req.params.id);
   console.log("console log id =", ID);
-  fs.readFile(path.join(__dirname, "/db/db.json"), function (error, response) {
+  fs.readFile(path.join(__dirname, "./Develop/db/db.json"), function (error, response) {
     if (error) {
       console.log(error);
     }
+    console.log("hellothere",response)
     const notes = JSON.parse(response);
     console.log("console log notes = ", notes);
     const newNotesArray = notes.filter((item) => {
       return item.id !== ID;
     });
     fs.writeFile(
-      path.join(__dirname, "/db/db.json"),
+      path.join(__dirname, "./Develop/db/db.json"),
       JSON.stringify(newNotesArray, null, 2),
       function (err) {
         if (err) throw err;
